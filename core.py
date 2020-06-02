@@ -12,11 +12,12 @@ def find_stages():
     # ('/dev/ttyAMA0', 'ttyAMA0', {})]
     # each identified serial port is expressed within a tuple, i.e. ('','','').
  
-    # The loop below will find all identified stage controllers and
+    # The loop will find all matched devices and store them in a list called dev
     dev = []
     for dev_ini in usb.core.find(find_all=True, custom_match= lambda x: x.bDeviceClass != 9):
         dev.append(dev_ini)
-    
+    # Since we know the controller will be the second device to show up, therefore we and predict that 
+    # dev[1] is the device we're looking for
     try:
         #FIXME: this avoids an error related to https://github.com/walac/pyusb/issues/139
         #FIXME: this could maybe be solved in a better way?
